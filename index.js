@@ -60,7 +60,7 @@ const load_data = function() {
                 htmlgen = htmlgen + '"><p style="font-size:20px;"><b>'+repo.full_name+'</b></p><p style="color:';
                 if (repo.archived) {htmlgen = htmlgen + '#d0c18a';} else {htmlgen = htmlgen + '#808080';};
                 htmlgen = htmlgen + ';font-size:10px;">'+repo.description+'</p><p>';
-                for (var topic of repo.topics) {htmlgen = htmlgen + '<button class="button-mini">'+topic+'</button>';};
+                for (var topic of repo.topics) {htmlgen = htmlgen + '<button class="button-mini" style="min-width:max-content;width:max-content;max-width:max-content;">'+topic+'</button>';};
                 htmlgen = htmlgen + '</p></div></a>';
             };
             document.getElementById('repositories').innerHTML = htmlgen;
