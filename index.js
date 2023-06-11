@@ -26,7 +26,7 @@ const hashchanger = function() {
 };
 const load_data = function() {
     //Loading Posts
-    var requestURL = 'http://hereus.pythonanywhere.com/user/islekcaganmert/back';
+    var requestURL = 'https://hereus.pythonanywhere.com/user/islekcaganmert/back';
     fetch(requestURL)
         .then(function(response) {
             if (response.ok) {
@@ -44,7 +44,7 @@ const load_data = function() {
             document.getElementById('posts').innerHTML = htmlgen;
         });
     //Loading Repos
-    requestURL = 'http://api.github.com/users/islekcaganmert/repos';
+    requestURL = 'https://api.github.com/users/islekcaganmert/repos';
     fetch(requestURL)
         .then(function(response) {
             if (response.ok) {
