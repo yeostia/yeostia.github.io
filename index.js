@@ -1,6 +1,6 @@
 var isAutoScrolling = false;
 const hashscroll = function() {
-    for (var hashpage of ['homepage','about','education','experience','works','posts','repositories','contact']) {
+    for (var hashpage of ['homepage','blog','about','education','experience','works','posts','repositories','contact']) {
         selected_navbutton = document.getElementById(hashpage+'-button');
         selected_navbutton.style = 'margin-bottom:25px;';
     };
@@ -16,7 +16,9 @@ const hashchanger = function() {
                 if (window.scrollY >= document.getElementById('works').offsetTop) {window.location.hash = 'works'} else {
                     if (window.scrollY >= document.getElementById('experience').offsetTop) {window.location.hash = 'experience'} else {
                         if (window.scrollY >= document.getElementById('education').offsetTop) {window.location.hash = 'education'} else {
-                            if (window.scrollY >= document.getElementById('about').offsetTop) {window.location.hash = 'about'} else {window.location.hash = ''};
+                            if (window.scrollY >= document.getElementById('about').offsetTop) {window.location.hash = 'about'} else {
+                                if (window.scrollY >= document.getElementById('blog').offsetTop) {window.location.hash = 'blog'} else {window.location.hash = ''};
+                            };
                         };
                     };
                 };
@@ -38,10 +40,18 @@ const load_data = function() {
             for (var post of data.posts) {
                 htmlgen = htmlgen + '<div class="the_box" style="margin-top:40px;margin-bottom:-30px;"><p style="font-size:20px;"><b>'+post.username;
                 if (post.community !== '') {htmlgen = htmlgen + ' > '+post.community;};
-                htmlgen = htmlgen + '</b></p><p style="color:#808080;font-size:10px;">'+post.date_created.split(' ')[1]+' '+post.date_created.split(' ')[2]+' '+post.date_created.split(' ')[3]+'</p>';
+                htmlgen = htmlgen + '</b></p><p style="color:#808080;font-size:10px;">'+post.date_created.split(' ')[2]+' '+post.date_created.split(' ')[1]+', '+post.date_created.split(' ')[3]+'</p>';
                 htmlgen = htmlgen + '<p>'+post.text.replace('<long>','<br>&nbsp;<br>')+'</p></div></div>';
             };
             document.getElementById('posts').innerHTML = htmlgen;
+            var htmlgen = '<div style="height:50px;"></div><p style="margin-bottom:50px;"><font size="30px"><b>My Blog</b></font></p>'
+            for (var article of data.articles.reverse()) {
+                htmlgen = htmlgen + '<a href="/blog/#'+article.id.toString();
+                htmlgen = htmlgen + '"><div class="the_box" style="margin-top:40px;margin-bottom:-30px;cursor:pointer;"><p style="font-size:20px;"><b>'+article.title;
+                htmlgen = htmlgen + '</b></p><p style="color:#808080;font-size:10px;">'+article.date_published.split(' ')[2]+' '+article.date_published.split(' ')[1]+', '+article.date_published.split(' ')[3]+'</p>';
+                htmlgen = htmlgen + '</div></a>';
+            };
+            document.getElementById('blog').innerHTML = htmlgen;
         });
     //Loading Repos
     requestURL = 'https://api.github.com/users/islekcaganmert/repos';
@@ -52,7 +62,6 @@ const load_data = function() {
             };
         })
         .then(function(data) {
-            console.log(JSON.stringify(data));
             var htmlgen = '<div style="height:50px;"></div><p style="margin-bottom:50px;"><font size="30px"><b>My Public Repositories</b></font></p>';
             for (var repo of data) {
                 htmlgen = htmlgen + '<a href="https://github.com/'+repo.full_name+'" target="_blank"><div class="the_box" style="margin-top:40px;margin-bottom:-30px;';
