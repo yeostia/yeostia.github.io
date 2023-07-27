@@ -28,7 +28,7 @@ const hashchanger = function() {
 };
 const load_data = function() {
     //Loading Posts
-    var requestURL = 'https://hereus.pythonanywhere.com/user/islekcaganmert/back';
+    var requestURL = 'https://hereus.pythonanywhere.com/user/yeostia/back';
     fetch(requestURL)
         .then(function(response) {
             if (response.ok) {
@@ -54,7 +54,7 @@ const load_data = function() {
             document.getElementById('blog').innerHTML = htmlgen;
         });
     //Loading Repos
-    requestURL = 'https://api.github.com/users/islekcaganmert/repos';
+    requestURL = 'https://api.github.com/users/yeostia/repos';
     fetch(requestURL)
         .then(function(response) {
             if (response.ok) {
